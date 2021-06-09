@@ -1,0 +1,400 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="description" content="">
+    <meta name="keywords" content="thema bootstrap template, thema admin, bootstrap, admin template, bootstrap admin">
+
+    <meta name="author" content="LanceCoder">
+
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+
+    <link rel="shortcut icon" href="">
+    <title>Dashboard</title>
+
+    <!-- Start Global plugin css -->
+    <link href="../static/css/global-plugins.css" rel="stylesheet">
+    <link href="../static/vendors/jquery-icheck/skins/all.css" rel="stylesheet" />
+    <!-- <link href="../../../assets/vendors/bootstrap/css/bootstrap.min.css" rel="stylesheet"> -->
+    <!-- <link href="../../../assets/css/bootstrap-reset.css" rel="stylesheet"> -->
+    <!-- <link href="../../../assets/vendors/font-awesome/css/font-awesome.css" rel="stylesheet"> -->
+    <!-- <link href="../../../assets/vendors/pe-icon-7-stroke/css/pe-icon-7-stroke.css" rel="stylesheet" /> -->
+    <!-- <link href="../../../assets/vendors/pe-icon-7-stroke/css/helper.css" rel="stylesheet"/> -->
+    <!-- <link href="../../../assets/vendors/jquery-notific8/jquery.notific8.css" rel="stylesheet"> -->
+    <!-- <link href="../../../assets/vendors/line-icons/line-icons.css" rel="stylesheet" /> -->
+    <!-- <link href="../../../assets/vendors/jquery-ui/jquery-ui.min.css" rel="stylesheet"> -->
+    <!-- <link href="../../../assets/vendors/dropdowns-enhancement/css/dropdowns-enhancement.css" rel="stylesheet"> -->
+    <!-- <link href="../../../assets/vendors/hover/hover.css" rel="stylesheet"> -->
+    <!-- <link href="../../../assets/vendors/animate/animate.css" rel="stylesheet"> -->
+    <!-- <link href="../../../assets/vendors/tooltipster/css/tooltipster.css" rel="stylesheet" type="text/css" /> -->
+    <!-- <link href="../../../assets/vendors/tooltipster/css/themes/tooltipster-light.css" rel="stylesheet" type="text/css" /> -->
+    <!-- <link href="../../../assets/vendors/tooltipster/css/themes/tooltipster-noir.css" rel="stylesheet" type="text/css" /> -->
+    <!-- <link href="../../../assets/vendors/tooltipster/css/themes/tooltipster-punk.css" rel="stylesheet" type="text/css" /> -->
+    <!-- <link href="../../../assets/vendors/tooltipster/css/themes/tooltipster-shadow.css" rel="stylesheet" type="text/css" /> -->
+    <!-- <link href="../../../assets/vendors/perfect-scrollbar/css/perfect-scrollbar.min.css" rel="stylesheet" /> -->
+    <!-- End Global plugin css -->
+    
+
+    <!--For this page uses this css plugin only-->
+    <link href="../static/css/table-responsive.css" rel="stylesheet"/>
+    <link href="../static/vendors/datatable/bootstrap/dataTables.bootstrap.css" rel="stylesheet">
+    <link href="../static/vendors/x-editable/bootstrap3-editable/css/bootstrap-editable.css" rel="stylesheet" type="text/css">
+    <link href="../static/vendors/x-editable/inputs-ext/address/address.css" rel="stylesheet" type="text/css">
+    <link href="../static/vendors/select2/select2.css" rel="stylesheet" />
+    <link href="../static/vendors/bootstrap-tagsinput/bootstrap-tagsinput.css" rel="stylesheet" />
+
+    <!-- Custom styles for this template -->
+    <link href="../static/css/theme.css" rel="stylesheet">
+    <link href="../static/css/style-responsive.css" rel="stylesheet"/>
+    <link href="../static/css/class-helpers.css" rel="stylesheet"/>
+
+    <!--Color schemes-->
+    <link href="../static/css/colors/green.css" rel="stylesheet">
+    <link href="../static/css/colors/turquoise.css" rel="stylesheet">
+    <link href="../static/css/colors/blue.css" rel="stylesheet">
+    <link href="../static/css/colors/amethyst.css" rel="stylesheet">
+    <link href="../static/css/colors/cloud.css" rel="stylesheet">
+    <link href="../static/css/colors/sun-flower.css" rel="stylesheet">
+    <link href="../static/css/colors/carrot.css" rel="stylesheet">
+    <link href="../static/css/colors/alizarin.css" rel="stylesheet">
+    <link href="../static/css/colors/concrete.css" rel="stylesheet">
+    <link href="../static/css/colors/wet-asphalt.css" rel="stylesheet">
+
+    <!--Fonts-->
+    <link href="../static/fonts/Indie-Flower/indie-flower.css" rel="stylesheet" />
+    <link href="../static/fonts/Open-Sans/open-sans.css?family=Open+Sans:300,400,700" rel="stylesheet" />
+
+</head>
+
+<!--
++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
+* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
+* Thema Color Schemes
+* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
+
+* Just add the attribute value to the attribute ID in <body> element
+* List of color scheme values that supported to this theme
+    - default-scheme - the default is green color
+    - alizarin-scheme
+    - amethyst-scheme
+    - blue-scheme
+    - carrot-scheme
+    - cloud-scheme
+    - concrete-scheme
+    - sun-flower-scheme
+    - turquoise-scheme
+    - wet-asphalt-scheme
+
++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+-->
+
+
+<!--
++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
+* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
+* Thema Layout Options
+* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
+
+* Lists of layout options just follow the instructions if you want to use this feature
+    > Boxed Page
+        - Just add class "fixed-width-unfixed-header" in <body> element 
+        - and add class "unfixed-header" also in  <div class="leftside-navigation"> just search "leftside-navigation"
+        - and add class also "unfixed-header" to the <section id="main-content"> element just search it
+        
+    > Boxed Page + Fixed Header
+        - Just add class "fixed-width" in <body> element
+        - and add class also "boxed-page-fixed-header" to the <section id="main-content"> element just search it
+
+    > Boxed Page + No sidebar
+        - Just add class "fixed-width-unfixed-header no-sidebar" in <body> element 
+        - and add class also "unfixed-header merge-left" to the <section id="main-content"> element just search it
+    
+    > Boxed Page + No sidebar + Fixed header
+        - Just add class "fixed-width no-sidebar" in <body> element
+        - and add class also "merge-left" to the <section id="main-content"> element just search it
+
+    > Full width + Unfixed header
+        - Just add class "full-content-unfixed-header" in <body> element
+        - and add class also "merge-left" to the <section id="main-content"> element just search it 
+    
+    > Right Sidebar
+        - Just follow the sample page
+        - the important to do is replace "<section id="main-content">" to "<section id="main-content-right">"
+
++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+-->
+<body id="default-scheme">
+
+    <section id="container">
+
+        <!--header start-->
+        <header class="header fixed-top clearfix">
+
+            <!--logo start-->
+            <div class="brand">
+
+                <a href="../index.html" class="logo">
+                    Dashboard
+                </a>
+            </div>
+            <!--logo end-->
+
+            <!-- 
+                *****************************
+                ** Start of top navigation **
+                *****************************
+             -->
+            <div class="top-nav">
+
+            </div>
+
+            <!-- 
+                *****************************
+                *** End of top navigation ***
+                *****************************
+             -->
+
+        </header>    
+        <!--header end-->
+
+
+
+        <!-- /menu footer buttons -->
+        
+        <!--<div class="sidebar-footer hidden-small">
+            <a class="tooltip-settings" title="Settings">
+                <span class="glyphicon glyphicon-cog" aria-hidden="true"></span>
+            </a>
+            <a class="tooltip-fullscreen" title="Full Screen">
+                <span class="glyphicon glyphicon-fullscreen" aria-hidden="true"></span>
+            </a>
+            <a class="tooltip-resize-fullscreen" title="Resize Screen" style='display:none'>
+                <span class="glyphicon glyphicon-resize-full" aria-hidden="true"></span>
+            </a>
+            <a class="tooltip-lock" title="Lock">
+                <span class="glyphicon glyphicon-eye-close" aria-hidden="true"></span>
+            </a>
+            <a class="tooltip-logout" title="Logout">
+                <span class="glyphicon glyphicon-off" aria-hidden="true"></span>
+            </a>
+        </div>-->    <!-- /menu footer buttons -->
+
+        <!--main content start-->
+        <section id="main-content">
+
+                
+            <section class="wrapper">
+
+                <!--======== Page Title and Breadcrumbs Start ========-->
+                <div>
+                    <br>
+                    <br>
+                    <br>
+                </div>
+                <!--======== Page Title and Breadcrumbs End ========-->
+
+                <!--======== Accordion Content Start End ========-->
+                                <!--=========== START X-EDITABLE ===========-->
+                                <div class="row page-registration">
+
+                                    <div class="col-md-4 col-md-offset-4 col-sm-6 col-sm-offset-3">
+
+                                        <div class="form-header bg-white padding-10 text-center">
+                                            <h2><strong>Login</strong></h2>
+                                        </div>
+
+                                        <div class="form-body bg-white padding-20">
+                                            <form action="/login/" method="post">
+                                                {% csrf_token %}
+                                                <div class="form-group">
+                                                    <label for="email-address">邮箱地址</label>
+                                                    <input type="text" class="form-control" id="email" name="email">
+                                                </div>
+                                                <div class="form-group">
+                                                    <label for="first-name">密码</label>
+                                                    <input type="text" class="form-control" id="password" name="password" >
+                                                </div>
+                                                <div class="row">
+
+                                                    <div class="col-md-12 text-center">
+                                                        <button type="submit" class="btn btn-info btn-flat">登录</button>
+                                                    </div>
+                                                </div>
+                                                <hr>
+
+                                            </form>
+
+
+                                        </div><!--/form-body-->
+
+                                    </div><!--/col-md-12-->
+
+                                </div>
+
+                                <!--=========== END X-EDITABLE ===========-->
+                <!--======== Accordion Content Start End ========-->
+
+
+            </section>
+        </section>
+        <!--======== Main Content End ========-->
+
+
+        <!--===== Right sidebar nofications start ========-->
+        <aside>
+            <div id="right-sidebar" class="right-sidebar-notifcations nav-collapse hide-right-bar-notifications">
+                <div class="bs-example bs-example-tabs right-sidebar-tab-notification" data-example-id="togglable-tabs">
+                    <ul id="right-sidebar-tabs" class="nav nav-tabs" role="tablist">
+                        <li role="presentation" class="active">
+                            <a href="#activities" id="activities-tab" role="tab" data-toggle="tab" aria-controls="activities" aria-expanded="true">Activities</a>
+                        </li>
+                        <li role="presentation">
+                            <a href="#tasks" role="tab" id="tasks-tab" data-toggle="tab" aria-controls="tasks">Tasks</a>
+                        </li>
+                        <li role="presentation">
+                            <a href="#settings" role="tab" id="settings-tab" data-toggle="tab" aria-controls="settings">Settings</a>
+                        </li>
+                        
+                    </ul>
+
+                </div><!-- /example -->
+                <div class="btn-bottom-right-sidebar-close">
+                    <span class="fa fa-times"></span>
+                </div>
+                    
+            </div>
+        </aside>    
+        <!--===== Right sidebar nofications end ========-->
+
+    </section><!--/.container-->
+
+    <!--===== Footer Start ========-->
+
+    <!-- Placed js at the end of the document so the pages load faster -->
+
+    <!--##################################################################################
+    #
+    # Thema GLOBAL JS PLUGINS
+    # 
+    # NOTE: These libraries are neccessary to run the template so don't remove one of these libraries. 
+    # You can uncomment the following libraries commented and comment the global-plugins.js but it will may cause slow performance of the template because of many links should be load from the server.
+    #
+    ##################################################################################-->
+    <script src="../static/js/global-plugins.js"></script>
+    <!-- <script src="../../../assets/js/jquery.js"></script>
+    <script src="../../../assets/js/jquery-migrate-1.2.1.min.js"></script>
+    <script src="../../../assets/vendors/jquery.cookie/jquery.cookie.js"></script>
+    <script src="../../../assets/vendors/jquery-ui/jquery-ui.min.js"></script>
+    <script src="../../../assets/vendors/jquery-easing/jquery.easing.1.3.js"></script>
+    <script src="../../../assets/vendors/bootstrap/js/bootstrap.js"></script>
+    <script src="../../../assets/vendors/jquery/dcjqaccordion.2.7.js"></script>
+    <script src="../../../assets/vendors/jquery/scrollTo.min.js"></script>
+    <script src="../../../assets/vendors/jquery/slimscroll.js"></script>
+    <script src="../../../assets/vendors/jquery/nicescroll.js"></script>
+    <script src="../../../assets/vendors/progressbar/bootstrap-progressbar.min.js"></script>
+    <script src="../../../assets/vendors/counter/waypoints.min.js" type="text/javascript" ></script>
+    <script src="../../../assets/vendors/counter/jquery.counterup.min.js" type="text/javascript" ></script>
+    <script src="../../../assets/vendors/jquery-icheck/icheck.min.js"></script>
+    <script src="../../../assets/vendors/bootstrap-datepicker/js/bootstrap-datepicker.js"></script>
+    <script src="../../../assets/vendors/bootstrap-timepicker/js/bootstrap-timepicker.min.js"></script>
+    <script src="../../../assets/vendors/bootstrap-colorpicker/js/bootstrap-colorpicker.js"></script>
+    <script src="../../../assets/vendors/bootstrap-tagsinput/bootstrap-tagsinput.js"></script>
+    <script src="../../../assets/vendors/summernote/summernote.min.js"></script>
+    <script src="../../../assets/vendors/jquery.autosize/jquery.autosize.js"></script>
+    <script src="../../../assets/vendors/jquery.multi-select/js/jquery.multi-select.js"></script>
+    <script src="../../../assets/vendors/jquery.multi-select/js/jquery.quicksearch.js"></script>
+    <script src="../../../assets/vendors/typeahead/js/typeahead.bundle.js"></script>
+    <script src="../../../assets/vendors/typeahead/js/handlebars.min.js"></script>
+    <script src="../../../assets/vendors/perfect-scrollbar/js/perfect-scrollbar.min.js"></script>
+    <script src="../../../assets/vendors/select2/select2.min.js"></script>
+    <script src="../../../assets/vendors/bootstrap-star-rating/js/star-rating.min.js"></script>
+    <script src="../../../assets/vendors/bootstrap-fileupload/js/bootstrap-fileupload.js"></script>
+    <script src="../../../assets/vendors/bootstrap-inputmask/bootstrap-inputmask.min.js"></script>
+    <script src="../../../assets/vendors/jquery.validate/jquery.validate.min.js"></script>
+    <script src="../../../assets/vendors/bootstrap-wizard/jquery.bootstrap.wizard.min.js"></script>
+    <script src="../../../assets/vendors/dropzone/dropzone.min.js"></script>
+    <script src="../../../assets/vendors/plupload/js/plupload.full.min.js"></script>
+    <script src="../../../assets/vendors/plupload/js/jquery.plupload.queue/jquery.plupload.queue.min.js"></script>
+    <script src="../../../assets/vendors/x-editable/bootstrap3-editable/js/bootstrap-editable.js"></script>
+    <script src="../../../assets/vendors/x-editable/inputs-ext/address/address.js"></script>
+    <script src="../../../assets/vendors/x-editable/inputs-ext/typeaheadjs/typeaheadjs.js"></script>
+    <script src="../../../assets/vendors/owl-carousel/owl.carousel.js"></script>
+    <script src="../../../assets/vendors/magnific-popup/js/jquery.magnific-popup.js"></script>
+    <script src="../../../assets/vendors/masonry/masonry.pkgd.min.js"></script>
+    <script src="../../../assets/vendors/moment.min.js"></script>
+    <script src="../../../assets/vendors/bootstrap-touchspin/jquery.bootstrap-touchspin.min.js"></script>
+    <script src="../../../assets/vendors/raphael-min.js" charset="utf-8" ></script>
+    <script src="../../../assets/vendors/sweetalert/sweetalert.min.js"></script>
+    <script src="../../../assets/vendors/word-rotator/jquery.wordrotator.min.js"></script>
+    <script src="../../../assets/vendors/wow-animations/js/wow.min.js"></script>
+    <script src="../../../assets/vendors/rwd-table/js/rwd-table.min.js?v=5.0.3"></script>
+    <script src="../../../assets/vendors/jqueryui.sortable.animation/jquery.ui.sortable-animation.js"></script>
+    <script src="../../../assets/vendors/tooltipster/js/jquery.tooltipster.js" type="text/javascript" ></script>
+    <script src="../../../assets/vendors/dropdowns-enhancement/js/dropdowns-enhancement.min.js" type="text/javascript"></script>
+    <script src="../../../assets/vendors/jquery-notific8/jquery.notific8.js" type="text/javascript"></script>
+    <script src="../../../assets/vendors/date.js"></script>
+    <script src="../../../assets/vendors/pogo-slider/js/jquery.pogo-slider.min.js" type="text/javascript" ></script>
+    <script src="../../../assets/vendors/bootstrap-daterangepicker/daterangepicker.js" type="text/javascript" ></script>
+    <script src="../../../vendors/nestable/jquery.nestable.js" type="text/javascript" ></script>
+    <script src="../../../assets/vendors/bstooltip/bstooltip.js"></script> -->
+
+    <!--##################################################################################
+    #
+    # COMMON SCRIPT FOR THIS PAGE
+    #
+    ##################################################################################-->
+
+
+
+
+
+    <!--common script init for all pages-->
+    <script src="../static/js/theme.js" type="text/javascript" ></script>
+
+    <!-- For the page has tooltipslter only -->
+    <script src="../static/js/tooltipster.js" type="text/javascript" ></script>
+
+    <!-- For for the page that has form only -->
+    <script src="../static/js/forms.js"></script>
+    <script src="../static/js/form-validation.js"></script>
+    <script src="../static/js/form-wizard.js"></script>
+    <script src="../static/js/form-plupload.js"></script>
+    <script src="../static/js/form-x-editable.js"></script>
+
+    <script type="text/javascript">
+
+
+        $(document).ready(function(){
+            new WOW().init();
+
+            App.initPage();
+            App.initLeftSideBar();
+            App.initCounter();
+            App.initNiceScroll();
+            App.initPanels();
+            App.initProgressBar();
+            App.initSlimScroll();
+            App.initNotific8();
+            App.initTooltipster();
+            App.initStyleSwitcher();
+            App.initMenuSelected();
+            App.initRightSideBar();
+            App.initSummernote();
+            App.initAccordion();
+            App.initModal();
+            App.initPopover();
+
+        });
+    </script>
+
+
+</body>
+
+</html>
+
+<!--===== Footer End ========-->
