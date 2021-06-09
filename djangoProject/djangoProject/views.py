@@ -590,9 +590,15 @@ def proxy_post(request):
                 cursor.execute("create table proxy_list (addr varchar(16))")
                 for proxy in proxy_list:
                     cursor.execute("insert into proxy_list (addr) values ('%s')" % proxy)
+                
+                config.set("proxy", "if_proxy", "1")
+                config.write(open("djangoProject/WebConf.conf", "w"))
         elif if_proxy == "0":
             cursor.execute("drop table proxy_list")
             cursor.execute("update config_info set conf_value=0 where conf='if_proxy' and conf_section='proxy'")
+            config.set("proxy", "if_proxy", "0")
+            config.set("proxy", "proxy_list", "none")
+            config.write(open("djangoProject/WebConf.conf", "w"))
 
     conn.commit()
     conn.cursor()
