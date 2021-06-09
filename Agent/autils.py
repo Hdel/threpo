@@ -15,7 +15,8 @@ def hash_wrapper(msg):
 
 
 # set file "hardware"
-# whenever changes occure
+# whenever changes occur
+
 def set_hardware(hardware_dict):
     with open("hardware", "w") as w_file:
         info_string = str(hardware_dict)
@@ -56,7 +57,7 @@ def collect_normal():
 
     elif os.name == "nt":
         import wutils
-        return wutils.Win32Info().collect_normal()
+        return wutils.CollectInfo().collect_normal()
 
     else:
         return {"error": "os not recognized"}

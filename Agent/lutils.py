@@ -166,3 +166,17 @@ def get_nic_info():
     else:
         return {"nic_info": nic_info}
 
+
+def ping_rtt(ip):
+    pre_strs = os.popen("ping %s -c 1" % ip).read()
+    print(pre_strs)
+
+    str_list = pre_strs.split("\n")
+    rtt = str_list[-2]
+
+    pattern = r"([\d]+.?\d*)"
+    re_result = re.search(pattern, rtt)
+
+    return float(re_result.group())
+
+print(collect_normal())
