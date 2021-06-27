@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="SshConfigs">
+    <configs>
+      <sshConfig host="ppi@10.190.2.10" id="1d5e7c37-495b-4998-96d4-b82ad64bf7fc" keyPath="C:\Users\Hester\Desktop\thesis\ppi@2.10" port="22" nameFormat="DESCRIPTIVE" username="ppi" />
+    </configs>
+  </component>
+</project>

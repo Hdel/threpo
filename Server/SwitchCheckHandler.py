@@ -1,30 +1,19 @@
+import os
 import re
 import telnetlib
 import threading
 import time
-from configparser import ConfigParser
 
-import pymysql
+
+import DatabaseUtils
 
 switch_list = dict()
-
-
-def get_db_conn():
-    config = ConfigParser()
-    ret = config.read("C:\\Users\\Hester\\Desktop\\thesis\\th1\\Server\\config.conf")
-    host = config.get("mysql", "host")
-    port = config.get("mysql", "port")
-    database = config.get("mysql", "database")
-    username = config.get("mysql", "username")
-    password = config.get("mysql", "password")
-    conn = pymysql.connect(host=host, user=username, port=int(port), password=password, db=database)
-    return conn
 
 
 def refresh_switch_list():
     switch_list.clear()
 
-    conn = get_db_conn()
+    conn = DatabaseUtils.get_database_connection()
     cursor = conn.cursor()
     cursor.execute("select * from switch_table")
     switches = cursor.fetchall()
@@ -157,7 +146,7 @@ class SwitchCheckHandler(threading.Thread):
     def __init__(self):
         threading.Thread.__init__(self)
         refresh_switch_list()
-        self.conn = get_db_conn()
+        self.conn = DatabaseUtils.get_database_connection()
         cursor = self.conn.cursor()
         for switch in switch_list:
             sql_str = "create table if not exists switch_%d (interface varchar (40), status varchar (255))"
@@ -212,12 +201,8 @@ class SwitchCheckHandler(threading.Thread):
                 for left_interface in stored_dict:
                     cursor.execute(insert_sql % (9, table+"@"+left_interface+"@"+stored_dict[left_interface], time.time(), 0))
 
-                cursor.executemany("insert into "+ table + " (interface, status) values (%s, %s)", args=results)
+                cursor.executemany("insert into " + table + " (interface, status) values (%s, %s)", args=results)
                 cursor.execute("update switch_table set op_timestamp = %f where id = %d" %
                                (time.time(), switch_id))
                 conn.commit()
             break
-
-
-handler_s = SwitchCheckHandler()
-handler_s.start()

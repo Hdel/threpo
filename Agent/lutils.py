@@ -35,7 +35,7 @@ def get_cpu_info():
 
     for i in range(cpu_number):
         new_item = {
-            "name": pre_name_strs[i][13:],
+            "caption": pre_name_strs[i][13:],
             "core": int(pre_core_strs[i].split(' ')[-1])
         }
         cpu_info.append(new_item)
@@ -140,10 +140,10 @@ def get_disk_info():
 
         model = re.findall(pattern_model, pre_strs)[0][6:-1]
         sn = re.findall(pattern_SN, pre_strs)[0][9:-1]
-        disk_info.append({"name": model, "sn": sn, "size": final_size})
+        disk_info.append({"caption": model, "sn": sn, "size": final_size})
 
     if len(disk_info) == 0:
-        disk_info.append({"name": "none", "sn": "none", "size":0})
+        disk_info.append({"caption": "none", "sn": "none", "size":0})
 
     return {"disk_info": disk_info}
 
@@ -151,15 +151,16 @@ def get_disk_info():
 def get_gcard_info():
     pre_strs = os.popen("lspci | grep -i vga").read()
     pattern = re.compile(r'controller: (.+)\n')
+    gcard_list = pattern.findall(pre_strs)
 
-    return {"gcard_info": pattern.findall(pre_strs)}
+    return {"gcard_info": list(map(lambda i: {"caption": i}, gcard_list))}
 
 
 def get_nic_info():
     nic_info = []
     for line in os.popen("ifconfig"):
         if 'ether' in line:
-            nic_info.append(line.split()[1])
+            nic_info.append({"mac": line.split()[1]})
 
     if len(nic_info) == 0:
         return {"nic_info": ["error while collecting"]}
@@ -178,5 +179,3 @@ def ping_rtt(ip):
     re_result = re.search(pattern, rtt)
 
     return float(re_result.group())
-
-print(collect_normal())

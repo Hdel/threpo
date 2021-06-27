@@ -1,3 +1,4 @@
+import os
 import smtplib
 import time
 from configparser import ConfigParser
@@ -6,7 +7,8 @@ from email.header import Header
 from email.mime.multipart import MIMEMultipart
 from email.mime.text import MIMEText
 
-import pymysql
+
+import DatabaseUtils
 
 
 class DatabaseThread(threading.Thread):
@@ -15,14 +17,10 @@ class DatabaseThread(threading.Thread):
 
     def run(self):
         config = ConfigParser()
-        config.read("C:\\Users\\Hester\\Desktop\\thesis\\th1\\Server\\config.conf")
+        config.read(os.path.dirname(__file__) + "/config.conf")
         check_interval = int(config.get("interval", "check_exist"))
-        host = config.get("mysql", "host")
-        port = config.get("mysql", "port")
-        database = config.get("mysql", "database")
-        username = config.get("mysql", "username")
-        password = config.get("mysql", "password")
-        conn = pymysql.connect(host=host, user=username, port=int(port), password=password, db=database)
+
+        conn = DatabaseUtils.get_database_connection()
 
         while True:
             print("start...")
@@ -45,7 +43,8 @@ class DatabaseThread(threading.Thread):
                            % (time.time(), 300))
 
             config = ConfigParser()
-            config.read("C:\\Users\\Hester\\Desktop\\thesis\\th1\\Server\\config.conf")
+            config.read(os.path.dirname(__file__) + "/config.conf")
+
             alert_items = config.items("alert")
             email_list = ""
             if alert_items[0][1] == "1":
@@ -78,7 +77,7 @@ class DatabaseThread(threading.Thread):
 
 def send_reg_email(email, password):
     print("send...")
-    mail_host = "******"
+    mail_host = "smtp.sina.cn"
     mail_user = "******"
     mail_pass = "******"
 

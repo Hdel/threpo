@@ -1,11 +1,15 @@
+import random
 import time
 import json
 import hashlib
-import database_ops
 
+import pymysql
+
+import DatabaseUtils
 
 server_addr = '127.0.0.1'
 server_port = 9556
+
 
 # sample output:
 # not yet well tested on virtual machine
@@ -25,33 +29,47 @@ server_port = 9556
 # gcard_info: ['VMware SVGA II Adapter']
 
 
+def random_gen():
+    key_alphabet = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890"
+    key_space = len(key_alphabet)
+    random.seed(time.time())
+    key = ""
+
+    # generate a ramdom key
+    for i in range(32):
+        key += key_alphabet[random.randint(0, key_space-1)]
+    return key
+
+
 def get_valid_interval(msg_type):
     return 10
 
 
-def check_integrity(msg, key):
-    info_dict = json.loads(msg)
-
-    if info_dict["type"] == "registration":
-        return {"type": "registration", "info": info_dict["info"], "status": "sound"}
+def check_integrity(msg, key=0):
+    info_dict = eval(str(msg))
 
     if type(key) == int:
-        cur_key = database_ops.Actions().get_comm_key(info_dict["identity"])
+        cur_key = get_key_by_id(info_dict["identity"])
     else:
         cur_key = key
+
+    print(key)
+
     stamp = info_dict["stamp"]
     msg_time = info_dict["timestamp"]
     msg_type = info_dict["type"]
     identity = info_dict["identity"]
+
     valid_interval = get_valid_interval(msg_type)
 
     info_dict.pop("stamp")
-    info_dict.update({"key": cur_key})
+    info_dict.update({"secret": cur_key})
 
-    sha256_hash = hashlib.sha256()
-    sha256_hash.update(str(info_dict).encode("utf-8"))
+    print(info_dict)
 
-    if sha256_hash.hexdigest() == stamp:
+    hex_digest = hash_wrapper(info_dict)
+
+    if hex_digest == stamp:
         if time.time() - msg_time <= valid_interval:
             return {"type": msg_type, "identity": identity, "status": "sound", "info": info_dict["info"]}
         return {"status": "error", "description": "time out"}
@@ -71,4 +89,41 @@ def hash_wrapper(msg):
     return hash_obj.hexdigest()
 
 
+def get_key_by_id(conn: pymysql.Connection, identity: int):
+    cursor = conn.cursor()
+    cursor.execute("select secret from machines where id=%d" % identity)
+    query_result = cursor.fetchone()
+    if query_result is None:
+        return None
+    else:
+        return query_result[0]
 
+
+def check_digest(conn: pymysql.Connection, identity: int, info: dict, sent_digest: str):
+    cursor = conn.cursor()
+    cursor.execute("select secret, digest from machines where id=%d" % identity)
+    result = cursor.fetchone()
+    secret, digest = result[0], result[1]
+
+    dict_with_secret = info.update({"secret": secret})
+    calculated_hash = hash_wrapper(dict_with_secret)
+
+    if not len(set([digest, calculated_hash, sent_digest])) == 1:
+        return {"status": "error", "description": "digest check failed"}
+
+    else:
+        return {"status": "sound"}
+
+
+def get_distance(ip1, ip2):
+    ip_list_1 = ip1.split('.')
+    result_1 = 0
+    for i in range(4):
+        result_1 = result_1 + int(ip_list_1[i]) * 256 ** (3 - i)
+
+    ip_list_2 = ip2.split('.')
+    result_2 = 0
+    for i in range(4):
+        result_2 = result_2 + int(ip_list_2[i]) * 256 ** (3 - i)
+
+    return abs(result_2-result_1)

@@ -37,7 +37,7 @@ class CollectInfo(object):
 
         cpu_info = []
         for cpu in cpu_lists:
-            cpu_info.append({"name": cpu.Name, 'core': cpu.NumberOfCores})
+            cpu_info.append({"caption": cpu.Name, 'core': cpu.NumberOfCores})
 
         return {'cpu_info': cpu_info}
 
@@ -63,7 +63,7 @@ class CollectInfo(object):
         disk_info = []
         for disk in self.wmi_obj.Win32_DiskDrive():  # 每块硬盘都要获取相应信息
             item_data = dict()
-            item_data['name'] = disk.Model
+            item_data['caption'] = disk.Model
             item_data['sn'] = disk.SerialNumber
             item_data['size'] = int(int(disk.Size) / (1024 ** 3))
             disk_info.append(item_data)
@@ -78,7 +78,7 @@ class CollectInfo(object):
             # many adapters can be fetched by Win32_NetworkConfiguration
             # but real physical network adapter has PNPDeviceID that starts with "PCI"
             if nic.MACAddress is not None and nic.PNPDeviceID.startswith("PCI"):
-                nic_info.append(nic.MACAddress)
+                nic_info.append({"mac": nic.MACAddress})
 
         return {'nic_info': nic_info}
 
@@ -88,7 +88,7 @@ class CollectInfo(object):
         gcard_info = []
 
         for gcard in gcard_list:
-            gcard_info.append(gcard.Name)
+            gcard_info.append({"caption": gcard.Name})
 
         return {"gcard_info": gcard_info}
 
@@ -103,3 +103,4 @@ class CollectInfo(object):
 if __name__ == "__main__":
     data = CollectInfo().collect_normal()
     print(data)
+

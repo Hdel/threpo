@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="WebServers">
+    <option name="servers">
+      <webServer id="5c7253fa-8027-4ec0-8981-526eb199210f" name="PPI">
+        <fileTransfer rootFolder="/home/ppi" accessType="SFTP" host="ppi@10.190.2.10" port="22" sshConfigId="1d5e7c37-495b-4998-96d4-b82ad64bf7fc" sshConfig="ppi@ppi@10.190.2.10:22 key" keyPair="true">
+          <advancedOptions>
+            <advancedOptions dataProtectionLevel="Private" passiveMode="true" shareSSLContext="true" />
+          </advancedOptions>
+        </fileTransfer>
+      </webServer>
+    </option>
+  </component>
+</project>

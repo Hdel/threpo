@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="PublishConfigData" serverName="PPI" remoteFilesAllowedToDisappearOnAutoupload="false">
+    <serverData>
+      <paths name="PPI">
+        <serverdata>
+          <mappings>
+            <mapping deploy="/home/ppi/pjtemp " local="$PROJECT_DIR$/../Server" web="/" />
+          </mappings>
+        </serverdata>
+      </paths>
+    </serverData>
+  </component>
+</project>

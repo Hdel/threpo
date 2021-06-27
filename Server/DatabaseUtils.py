@@ -1,3 +1,4 @@
+import time
 from configparser import ConfigParser
 import pymysql
 import os
@@ -24,30 +25,38 @@ def database_init():
     create_table_list = [admin_log, change_log, config_info, cpu_info, disk_info,
                          gcard_info, machines, nic_info, ram_info, staff_info, switch_table]
 
-    print("Creating tables...", end="")
+    print("Creating tables...", end=" ")
     for sql_create in create_table_list:
         cursor.execute(sql_create)
 
     conn.commit()
-    print("Done")
     conn.close()
+    print("Done")
 
 
-def database_insert(conn: pymysql.Connection, items):
+def insert_abnormal(error_dict, conn, identity):
     cursor = conn.cursor()
-    for item in items:
-        table_name = item
-        for entry in items[item]:
-            fields_fragment = ""
-            values_fragment = ""
-            for field in entry:
-                fields_fragment += str(field) + " "
-                values_fragment += str(entry[field]) + " "
-
-            cursor.execute("insert into %s (%s) values(%s)" % (table_name, fields_fragment, values_fragment))
-
+    cursor.execute("insert into change_log (operation, description, op_timestamp, witness, machine) values (%d, '%s', %f, %d, %d)" %
+                   (5, "integrity@"+str(identity)+"@"+error_dict["description"], time.time(), 0, identity))
     conn.commit()
 
+
+def update_list(conn, agent_list):
+    cursor = conn.cursor()
+    for identity in agent_list:
+        cursor.execute("update machine set op_timestamp=%f where id=%d" % (time.time(), identity))
+    conn.commit()
+
+
+def get_digest_by_id(conn, identity):
+    cursor = conn.cursor()
+    cursor.execute("select digest from machines where id=%d" % identity)
+    return cursor.fetchone()[0]
+
+
+##################################
+#   CREATE TABLE SQL QUERY       #
+##################################
 
 admin_log = """CREATE TABLE IF NOT EXISTS `sigma_log` (
                              `id` bigint(20) unsigned NOT NULL AUTO_INCREMENT,
