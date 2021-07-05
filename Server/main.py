@@ -2,22 +2,22 @@ import DatabaseThread
 import DatabaseUtils
 import ServerThread
 
-# ssl_server = ServerThread.SSLServer()
 # ssl_server.start()
 
 # print("done")
 
-# db_thread = DatabaseThread.DatabaseThread()
 # db_thread.start()
-# switch_thread = SwitchCheckHandler()
 # switch_thread.start()
+from SwitchCheckHandler import SwitchCheckHandler
 
 DatabaseUtils.database_init()
 
-server = ServerThread.SocketServer()
+ssl_server = ServerThread.SSLServer()
+server = ServerThread.ServerMain()
+db_thread = DatabaseThread.DatabaseThread()
+switch_thread = SwitchCheckHandler()
+
+ssl_server.start()
 server.start()
-server.join()
-print("done")
-
-
-# ssl_server.join()
+db_thread.start()
+switch_thread.start()
